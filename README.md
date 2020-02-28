@@ -80,8 +80,9 @@ npm run restart
 
 Example of sending REST API call within a ServiceNow Widget. 
 - ServiceNow will automatically authenicate you 
-- You then, retrieve your user token via Server Script
+- Retrieve the logged in user's token via the Server Script
 - Pass the token to the header of your Client Side AJAX request within the `X-User-Token` header
+- Voila!
 
 > HTML Template
 ```html
