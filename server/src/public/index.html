@@ -1,34 +1,16 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect to ServiceNow</title>
-</head>
-
-<body>
-    <h1>Connection to ServiceNow</h1>
-    <button onClick="send()">Send Request</button>
-    <pre id="response"></pre>
-</body>
-
-<script link="text/javascript" src="index.js"></script>
-
-</html> -->
-
-
 <!DOCTYPE html>
 <html ng-app="Snow">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
 </head>
-<body >
+
+<body>
     <div ng-controller="AppsOptsCtrl">
         <h1> {{ title }}</h1>
-       
+
         <table>
             <thead>
                 <th>Task Number</th>
@@ -49,10 +31,11 @@
         </table>
         <pre>{{ errorMsg }} </pre>
     </div>
-   
+
 </body>
 <script type="text/javascript" src="javascripts/libs/angular.min.js"></script>
 <script type="text/javascript" src="javascripts/libs/angular-route.min.js"></script>
 <script type="text/javascript" src="javascripts/libs/angular-resource.min.js"></script>
 <script type="text/javascript" src="javascripts/index.js"></script>
-</html> 
+
+</html>
