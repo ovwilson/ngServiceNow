@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,10 +15,8 @@
 
 <script link="text/javascript" src="index.js"></script>
 
-</html>
+</html> -->
 
-
-<!-- 
 
 <!DOCTYPE html>
 <html ng-app="Snow">
@@ -26,18 +24,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-   
 </head>
 <body >
-   
     <div ng-controller="AppsOptsCtrl">
         <h1> {{ title }}</h1>
        
+        <table>
+            <thead>
+                <th>Task Number</th>
+                <th>Key</th>
+                <th>State</th>
+                <th>Updated By</th>
+                <th>Updated</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data">
+                    <td>{{ item.number }}</td>
+                    <td>{{ item.key }}</td>
+                    <td>{{ item.state }}</td>
+                    <td>{{ item.sys_updated_by }}</td>
+                    <td>{{ item.sys_updated_on }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <pre>{{ errorMsg }} </pre>
     </div>
-    
+   
 </body>
-<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-<script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
-<script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="javascripts/angular.min.js"></script>
+<script type="text/javascript" src="javascripts/angular-route.min.js"></script>
+<script type="text/javascript" src="javascripts/angular-resource.min.js"></script>
 <script type="text/javascript" src="index.js"></script>
-</html> -->
+</html> 
