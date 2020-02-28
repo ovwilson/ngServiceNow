@@ -11,6 +11,7 @@
     "angular-resource": "^1.7.9",
     "angular-route": "^1.7.9",
     "axios": "^0.19.2",
+    "concurrently": "^5.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "pm2": "^4.2.3",
@@ -18,11 +19,12 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "npm run build:server && pm2 start ./../ecosystem.config.js --only ngServiceNow --watch",
+    "start": "concurrently \"npm run build:server:watch\" \"pm2 start ./../ecosystem.config.js --only ngServiceNow --watch\"",
     "restart": "npm run stop && npm start",
     "stop": "pm2 stop ngServiceNow --watch",
     "monitor": "pm2 monit",
-    "build:server": "tsc -p server"
+    "build:server": "tsc -p server",
+    "build:server:watch": "tsc -p server --watch"
   },
   "author": "",
   "license": "ISC"
