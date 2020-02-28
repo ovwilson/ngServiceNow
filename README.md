@@ -1,5 +1,5 @@
 # ngServiceNow
-This application uses a server to server connection from a Node.js server apo to a ServiceNow instance using the now REST API.
+This application uses a server to server connection from a Node.js server to a ServiceNow instance using the now REST API.
 
 ## Getting Started
 
