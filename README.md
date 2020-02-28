@@ -66,12 +66,12 @@ npm run restart
 
 | Command                       | Description                                                                            |
 | ----------------------------- | ---------------------------------------------------------------------------------------|
-| `npm start`                   | Starts the applicationny currently running typescript complier and pm2 server process. Both in watch mode.  |
+| `npm start`                   | Starts the application currently running typescript complier and pm2 server process. Both in watch mode.  |
 | `npm run restart`             | Restarts the application by running `npm run stop` then `npm start` | 
-| `npm run stop`                | Stops the pm2 server process application | 
+| `npm run stop`                | Stops the pm2 server process | 
 | `npm run monitor`             | Allows you to see the server logs and console while server is running.  For troubleshooting connection. |
-| `npm run build:server`        | Compiles the typescript files in javascript and places it within the `server/dist` directory |  
-| `npm run build:server:watch`  | Watches for changes to typescript files and re-compiles into the `server/dist` directory | 
+| `npm run build:server`        | Compiles the typescript files in javascript and places them within `server/dist` directory |  
+| `npm run build:server:watch`  | Watches for changes to typescript files and re-compiles into `server/dist` directory | 
 
 
 > `Note:` Unfortunately, you will have to manually refresh the browser to see any changes made to the applicaiton while it is running.
