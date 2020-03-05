@@ -1,0 +1,213 @@
+<div class="viewport">
+<!-- your widget template -->
+  
+  
+  
+<div class="alert alert-info" role="alert">
+  A simple info alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>
+  
+  <pre>{{ model | json }}</pre>
+  
+<div class="card">
+<button type="button" class="btn btn-info" ng-click="reset()">New</button>
+  <button type="button" class="btn btn-danger" ng-click="reset()">Reset</button>
+
+  </div>
+  
+  <div class="container">
+    
+    <div class="form-group">
+      <label labelfor="sys_id">System Id</label>
+  		<input disabled ng-model="model.sys_id" type="text" class="form-control" id="sys_id" required>
+ 	 </div>
+    
+  	<div class="form-group">
+      <label labelfor="short_description">Short Description</label>
+  		<input ng-model="model.short_description" type="text" class="form-control" id="short_description" required>
+ 	 </div>
+    
+  </div>
+  
+  
+  
+<div class="card">
+
+<button ng-if="!model.sys_id" type="button" class="btn btn-primary" ng-click="submit()">Submit</button>
+
+<button ng-if="model.sys_id" type="button" class="btn btn-secondary" ng-click="update()">Update</button>
+
+<button type="button" class="btn btn-secondary" ng-click="refresh()">Refresh</button>
+
+  </div>
+
+  
+<div class="card">
+
+  <table class="table">
+  <thead class="thead">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Number</th>
+      <th scope="col">Short Description</th>
+      <th scope="col">Updated On</th>
+      <th scope="col">Updated By</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in data">
+      <th scope="row">{{ item.sys_id }}</th>
+      <th scope="row"><a href="#" ng-click="select(item.sys_id)">{{ item.number }}</a></th>
+      <td>{{ item.short_description }}</td>
+      <td>{{ item.sys_updated_on }}</td>
+      <td>@{{ item.sys_updated_by }}</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+<div class="alert alert-danger" role="alert">
+  {{ error }}
+</div>
+  
+  </div>
+
+  function($scope,$http) {
+  /* widget controller */
+  var c = this;
+	
+	/* 
+	API
+	
+	*/
+	
+	$scope.nowAPI = '/api/now/table/';
+	$scope.requestTableName = 'sc_request';
+	$scope.sysparamLimit = 10;
+	$scope.response = null;
+	$scope.error = null;
+	$scope.data = [];
+	$scope.model = {};
+	$scope.modelGroup = [
+		{name: 'sys_id', label:'sys_id'},
+		{name: 'short_description', label:'Short Description'}
+	];
+	$scope.modelGroupKeys = 
+		$scope.modelGroup.map(function(group){ return group.name; })
+	
+	$scope.select = function(sys_id){
+		console.log(sys_id);
+		$scope.getRequest(sys_id);
+	}
+	
+	$scope.reset = function(){
+		$scope.model = {};
+	}
+	
+	$scope.submit = function(){
+		$scope.createRequest($scope.model);
+	}
+	
+	$scope.refresh = function(){
+		$scope.getRequests();
+	}
+	
+	$scope.update = function(){
+		$scope.updateRequest($scope.model);
+	}
+	
+	
+	$scope.getRequest = function(id){
+		$scope.getById($scope.nowAPI, $scope.requestTableName,id);
+	}
+		
+	$scope.getRequests = function(){
+		$scope.get($scope.nowAPI, $scope.requestTableName, $scope.sysparamLimit);
+	}
+	
+	$scope.createRequest = function(data){
+		$scope.post($scope.nowAPI, $scope.requestTableName, data);
+	}
+	
+	$scope.updateRequest = function(data){
+		$scope.patch($scope.nowAPI, $scope.requestTableName, data);
+	}
+	
+	
+	$scope.getById = function(url, tableName, id){
+	
+		$http.get(url+tableName+'/'+id).then(
+      function successCallback(response) {
+        $scope.model = $scope.modelReduce(response.data.result);
+				$scope.response = response;
+      },
+      function errorCallback(response) {
+        console.log("Unable to perform get request");
+				$scope.error = response;
+      }
+    );
+		
+	}
+	
+	$scope.get = function(url, tableName, queryLimit){
+	
+		$http.get(url+tableName+'?sysparm_query=^ORDERBYsys_updated_on^ORDERBYDESCsys_updated_on&sysparm_limit='+queryLimit).then(
+      function successCallback(response) {
+        $scope.data = response.data.result;
+				$scope.response = response;
+      },
+      function errorCallback(response) {
+        console.log("Unable to perform get request");
+				$scope.error = response;
+      }
+    );
+		
+	}
+	
+	$scope.post = function(url, tableName, data) {
+		
+    $http.post(url+tableName, data).then(
+      function successCallback(response) {
+        console.log("Successfully POST-ed data");
+				$scope.response = response;
+				$scope.reset();
+				$scope.getRequests();
+      },
+      function errorCallback(response) {
+        console.log("POST-ing of data failed");
+				$scope.error = response;
+      }
+    );
+		
+	}
+	
+	$scope.patch = function(url, tableName, data) {
+		var obj = $scope.modelReduce(data);
+
+		$http.patch(url + tableName + '/'+ data.sys_id, data).then(
+      function successCallback(response) {
+        console.log("Successfully PATCH-ed data");
+				$scope.response = response;
+				$scope.getRequests();
+      },
+      function errorCallback(response) {
+        console.log("PATCH-ing of data failed");
+				$scope.error = response;
+      }
+    );
+		
+	}
+	
+	$scope.modelReduce = function(data){
+		var obj = {};
+		$scope.modelGroupKeys.map(function(d){
+			obj[d] = data[d];
+		});
+		return obj;
+	}
+	
+	$scope.getRequests();
+	
+	
+}
