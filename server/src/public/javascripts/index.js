@@ -2,7 +2,7 @@ angular.module('Snow', ['ngRoute', 'ngResource'])
 	.controller('AppsOptsCtrl', function ($scope, $http) {
 
 		$scope.title = 'ngServiceNow';
-		$scope.url = 'http://localhost:3000/table';
+		$scope.url = 'http://localhost:3000/api/now/table';
 		$scope.data = [];
 		$scope.errorMsg = '';
 
