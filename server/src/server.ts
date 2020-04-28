@@ -14,18 +14,18 @@ class Server {
     }
 
     public config() {
-        console.log('Environment', [ 
-            process.env.SN_HOST,
-            process.env.SN_PATH,
-            process.env.SN_USER,
-            process.env.SN_PASS 
-        ])
+        // console.log('Environment', [ 
+        //     process.env.SN_HOST,
+        //     process.env.SN_PATH,
+        //     process.env.SN_USER,
+        //     process.env.SN_PASS 
+        // ])
     }
 
     public middleware() {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        this.app.use(express.static(process.cwd() + '/server/src/public'));
+        // this.app.use(express.static(process.cwd() + '/server/src/public'));
         this.app.use(cors());
         this.app.use(routes);
         this.app.listen(this.PORT, () =>

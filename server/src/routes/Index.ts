@@ -5,7 +5,7 @@ class IndexRouter {
     constructor() { }
 
     getIndex(request: Request, response: Response) {
-        response.send('<h1>Express Server Loaded using TypeScript</h1>');
+        response.send(`<h1>ServiceNow Express Server Running on port ${process.env.PORT} </h1>`);
         console.log('Index Route Activated');
     }
 
