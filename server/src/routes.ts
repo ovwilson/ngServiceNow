@@ -12,6 +12,7 @@ class Routes {
         this.setCommonRoutes();
         this.setAttachmentAPIRoutes();
         this.setTableAPIRoutes();
+        this.setScopedAPIRoutes();
     }
 
     public setCommonRoutes() {
@@ -32,6 +33,11 @@ class Routes {
 
         this.router.route('/props')
             .get(PropsRouter.get);
+    }
+
+    public setScopedAPIRoutes() {
+        this.router.route('/api/x_398178_award_fee/awards/roles')
+            .get(NOWRouter.get);
     }
 
 }
