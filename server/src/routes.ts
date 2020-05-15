@@ -1,6 +1,8 @@
 import * as express from 'express';
-import { indexRouter } from './routes/Index';
+import IndexRouter from './routes/Index';
 import NOWRouter from './routes/NOW';
+import UsersRouter from './routes/Users';
+import PropsRouter from './routes/Props';
 
 class Routes {
     public router: express.Router;
@@ -13,7 +15,7 @@ class Routes {
     }
 
     public setCommonRoutes() {
-        this.router.route('/').get(indexRouter);
+        this.router.route('/').get(IndexRouter.get);
     }
 
     public setAttachmentAPIRoutes() {
@@ -24,6 +26,12 @@ class Routes {
     public setTableAPIRoutes() {
         this.router.route('/api/now/:name/:table')
             .get(NOWRouter.get);
+
+        this.router.route('/sys_user')
+            .get(UsersRouter.get);
+
+        this.router.route('/props')
+            .get(PropsRouter.get);
     }
 
 }
