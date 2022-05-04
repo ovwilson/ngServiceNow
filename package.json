@@ -9,7 +9,7 @@
     "@types/faker": "^4.1.11",
     "@types/lokijs": "^1.5.3",
     "@types/node": "^13.7.6",
-    "angular": "^1.7.9",
+    "angular": "^1.8.3",
     "angular-resource": "^1.7.9",
     "angular-route": "^1.7.9",
     "axios": "^0.19.2",
